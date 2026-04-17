@@ -1,12 +1,12 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\LearningResourceController;
-use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\ReviewController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /* Public Routes (No login required) */
 Route::post('/login', [AuthController::class, 'login']);

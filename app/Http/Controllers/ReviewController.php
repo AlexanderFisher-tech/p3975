@@ -12,23 +12,23 @@ use OpenApi\Attributes as OA;
 class ReviewController extends Controller
 {
     #[OA\Post(
-        path: "/api/reviews",
-        summary: "Leave a review on a learning resource",
-        tags: ["Reviews"],
-        security: [["sanctum" => []]]
+        path: '/api/reviews',
+        summary: 'Leave a review on a learning resource',
+        tags: ['Reviews'],
+        security: [['sanctum' => []]]
     )]
     #[OA\RequestBody(
         required: true,
         content: new OA\JsonContent(
-            required: ["learning_resource_id", "rating", "content"],
+            required: ['learning_resource_id', 'rating', 'content'],
             properties: [
-                new OA\Property(property: "learning_resource_id", type: "integer", example: 1),
-                new OA\Property(property: "rating", type: "integer", example: 4),
-                new OA\Property(property: "content", type: "string", example: "Great explanation of integrals!")
+                new OA\Property(property: 'learning_resource_id', type: 'integer', example: 1),
+                new OA\Property(property: 'rating', type: 'integer', example: 4),
+                new OA\Property(property: 'content', type: 'string', example: 'Great explanation of integrals!'),
             ]
         )
     )]
-    #[OA\Response(response: 201, description: "Review saved successfully")]
+    #[OA\Response(response: 201, description: 'Review saved successfully')]
     public function store(Request $request)
     {
         $validated = $request->validate([

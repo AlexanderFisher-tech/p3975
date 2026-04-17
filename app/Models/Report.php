@@ -14,7 +14,7 @@ class Report extends Model
         'reason',
         'status',          // Added your status column
         'reportable_id',   // Handled by morphs()
-        'reportable_type'  // Handled by morphs()
+        'reportable_type',  // Handled by morphs()
     ];
 
     /**

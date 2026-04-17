@@ -14,7 +14,7 @@ class LearningResourceController extends Controller
         $resources = LearningResource::query()
             ->with([
                 'reviews' => function ($query) {
-                    $query->with('user:id,name')->latest();
+                    $query->with('user:id,name')->withCount('likes')->orderByDesc('likes_count')->latest();
                 },
             ])
             ->withAvg('reviews', 'rating')
@@ -48,7 +48,7 @@ class LearningResourceController extends Controller
                 "https://openlibrary.org/api/books?bibkeys=ISBN:{$isbn}&format=json&jscmd=data"
             );
 
-            if ($response->successful() && !empty($response->json())) {
+            if ($response->successful() && ! empty($response->json())) {
                 $bookData = $response->json()["ISBN:{$isbn}"] ?? null;
 
                 if ($bookData) {
@@ -71,7 +71,7 @@ class LearningResourceController extends Controller
         $resource = LearningResource::query()
             ->with([
                 'reviews' => function ($query) {
-                    $query->with('user:id,name')->latest();
+                    $query->with('user:id,name')->withCount('likes')->orderByDesc('likes_count')->latest();
                 },
             ])
             ->withAvg('reviews', 'rating')

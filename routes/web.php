@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ModerationController;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
-use Illuminate\Support\Facades\Http;
 
 Route::get('/debug-models', function () {
     $token = config('services.github_models.token');
@@ -28,7 +28,6 @@ Route::inertia('/', 'welcome', [
 ])->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('/', 'book-search')->name('home');
     Route::inertia('dashboard', 'dashboard')->name('dashboard');
     Route::inertia('book', 'book-search')->name('book');
 });

@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Create the Admin User with the is_admin flag set to true
-        \App\Models\User::factory()->create([
+        User::factory()->create([
             'name' => 'aa',
             'email' => 'aa@g.com',
             'password' => bcrypt('pwd'),

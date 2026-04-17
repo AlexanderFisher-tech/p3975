@@ -23,21 +23,21 @@ class BackendReviewTest extends TestCase
         $resource = LearningResource::create([
             'type' => 'youtube',
             'identifier' => 'https://youtube.com/watch?v=123',
-            'title' => 'Test Video'
+            'title' => 'Test Video',
         ]);
 
         $review1 = Review::create([
             'learning_resource_id' => $resource->id,
             'user_id' => $user1->id,
             'rating' => 4,
-            'content' => 'Review with 1 like'
+            'content' => 'Review with 1 like',
         ]);
 
         $review2 = Review::create([
             'learning_resource_id' => $resource->id,
             'user_id' => $user2->id,
             'rating' => 5,
-            'content' => 'Review with 2 likes'
+            'content' => 'Review with 2 likes',
         ]);
 
         Like::create(['review_id' => $review2->id, 'user_id' => $user1->id]);
@@ -66,14 +66,14 @@ class BackendReviewTest extends TestCase
         $resource = LearningResource::create([
             'type' => 'youtube',
             'identifier' => 'https://youtube.com/watch?v=123',
-            'title' => 'Existing Video'
+            'title' => 'Existing Video',
         ]);
 
         $response = $this->actingAs($user)
             ->postJson('/api/resources', [
                 'type' => 'youtube',
                 'identifier' => 'https://youtube.com/watch?v=123',
-                'title' => 'New Video'
+                'title' => 'New Video',
             ]);
 
         $response->assertStatus(200);
@@ -87,19 +87,19 @@ class BackendReviewTest extends TestCase
         $isbn = '0201896834';
 
         Http::fake([
-            "https://openlibrary.org/api/books*" => Http::response([
+            'https://openlibrary.org/api/books*' => Http::response([
                 "ISBN:{$isbn}" => [
                     'title' => 'The Art of Computer Programming',
                     'authors' => [['name' => 'Donald Knuth']],
-                    'cover' => ['large' => 'https://example.com/cover.jpg']
-                ]
-            ], 200)
+                    'cover' => ['large' => 'https://example.com/cover.jpg'],
+                ],
+            ], 200),
         ]);
 
         $response = $this->actingAs($user)
             ->postJson('/api/resources', [
                 'type' => 'textbook',
-                'identifier' => $isbn
+                'identifier' => $isbn,
             ]);
 
         $response->assertStatus(201);
@@ -107,7 +107,7 @@ class BackendReviewTest extends TestCase
             'identifier' => $isbn,
             'title' => 'The Art of Computer Programming',
             'author' => 'Donald Knuth',
-            'cover_image_url' => 'https://example.com/cover.jpg'
+            'cover_image_url' => 'https://example.com/cover.jpg',
         ]);
     }
 
@@ -119,7 +119,7 @@ class BackendReviewTest extends TestCase
             'learning_resource_id' => $resource->id,
             'user_id' => $user->id,
             'rating' => 5,
-            'content' => 'Cool'
+            'content' => 'Cool',
         ]);
 
         // Like it
@@ -143,7 +143,7 @@ class BackendReviewTest extends TestCase
 
         $response = $this->actingAs($user)
             ->postJson('/api/reports', [
-                'reason' => 'Bad content'
+                'reason' => 'Bad content',
             ]);
 
         $response->assertStatus(422);
