@@ -7,7 +7,7 @@ The application is built with a decoupled architecture: a **Laravel 13** backend
 ## Prerequisites
 
 Before you begin, ensure you have the following installed on your local machine:
-* **PHP** (v8.3+)
+* **PHP** (v8.5+)
 * **Composer**
 * **Node.js** (v20+)
 * **pnpm/npm** 
