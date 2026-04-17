@@ -6,7 +6,7 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.5",
+        "php": "^8.3",
         "darkaonline/l5-swagger": "^11.0",
         "filament/filament": "^5.4",
         "inertiajs/inertia-laravel": "^3.0",
@@ -19,7 +19,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
         "laravel/wayfinder": "^0.1.14",
-        "spatie/laravel-permission": "^7.2",
+        "spatie/laravel-permission": "^6.0",
         "spatie/laravel-query-builder": "^7.1"
     },
     "require-dev": {
@@ -99,6 +99,9 @@
         }
     },
     "config": {
+        "platform": {
+            "php": "8.3.30"
+        },
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,

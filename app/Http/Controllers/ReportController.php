@@ -9,23 +9,23 @@ use OpenApi\Attributes as OA;
 class ReportController extends Controller
 {
     #[OA\Post(
-        path: "/api/reports",
-        summary: "Report a resource or review to admins",
-        tags: ["Reports"],
-        security: [["sanctum" => []]]
+        path: '/api/reports',
+        summary: 'Report a resource or review to admins',
+        tags: ['Reports'],
+        security: [['sanctum' => []]]
     )]
     #[OA\RequestBody(
         required: true,
         content: new OA\JsonContent(
-            required: ["reason"],
+            required: ['reason'],
             properties: [
-                new OA\Property(property: "learning_resource_id", type: "integer", nullable: true),
-                new OA\Property(property: "review_id", type: "integer", nullable: true),
-                new OA\Property(property: "reason", type: "string", example: "Invalid YouTube link")
+                new OA\Property(property: 'learning_resource_id', type: 'integer', nullable: true),
+                new OA\Property(property: 'review_id', type: 'integer', nullable: true),
+                new OA\Property(property: 'reason', type: 'string', example: 'Invalid YouTube link'),
             ]
         )
     )]
-    #[OA\Response(response: 201, description: "Report submitted successfully")]
+    #[OA\Response(response: 201, description: 'Report submitted successfully')]
     public function store(Request $request)
     {
         $validated = $request->validate([

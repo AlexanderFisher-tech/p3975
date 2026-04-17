@@ -2,7 +2,7 @@
 
 This repository contains the source code for our web-based platform that allows users to discover, review, and rate learning materials. 
 
-The application is built with a decoupled architecture: a **Laravel 11** backend API and a **React/TypeScript (Vite)** frontend.
+The application is built with a decoupled architecture: a **Laravel 13** backend API and a **React/TypeScript (Vite)** frontend.
 
 ## Prerequisites
 

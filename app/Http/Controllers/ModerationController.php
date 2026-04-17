@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Report;
 
 class ModerationController extends Controller
@@ -10,7 +9,7 @@ class ModerationController extends Controller
     // Show the list of reports
     public function index()
     {
-        // Fetch all pending reports, newest first. 
+        // Fetch all pending reports, newest first.
         // We use 'with' to eager-load the user who made the report, and the content being reported.
         $reports = Report::with(['user', 'reportable'])->latest()->get();
 
@@ -21,7 +20,7 @@ class ModerationController extends Controller
     public function destroy($id)
     {
         $report = Report::findOrFail($id);
-        
+
         // 1. Delete the actual bad content (the Review or the Learning Resource)
         if ($report->reportable) {
             $report->reportable->delete();

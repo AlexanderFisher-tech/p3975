@@ -165,8 +165,8 @@ return [
     */
 
     'redirects' => [
-        'login' => '/book',
-        'register' => '/book',
+        'login' => '/dashboard',
+        'register' => '/dashboard',
     ],
 
 ];

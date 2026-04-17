@@ -22,7 +22,7 @@ class LearningResourceFactory extends Factory
         return [
             'type' => $type,
             'identifier' => $type === 'youtube'
-                ? 'https://www.youtube.com/watch?v=' . $this->faker->regexify('[A-Za-z0-9_-]{11}')
+                ? 'https://www.youtube.com/watch?v='.$this->faker->regexify('[A-Za-z0-9_-]{11}')
                 : $this->faker->isbn13(),
             'title' => $this->faker->sentence(),
             'author' => $type === 'textbook' ? $this->faker->name() : null,

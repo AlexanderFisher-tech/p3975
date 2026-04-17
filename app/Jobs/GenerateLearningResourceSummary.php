@@ -18,13 +18,11 @@ class GenerateLearningResourceSummary implements ShouldBeUnique, ShouldQueue
 
     public int $uniqueFor = 300;
 
-    public function __construct(public int $resourceId)
-    {
-    }
+    public function __construct(public int $resourceId) {}
 
     public function uniqueId(): string
     {
-        return 'learning-resource-summary-' . $this->resourceId;
+        return 'learning-resource-summary-'.$this->resourceId;
     }
 
     public function handle(GitHubModelsReviewSummaryService $summaryService): void

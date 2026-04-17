@@ -105,7 +105,7 @@ class GitHubModelsReviewSummaryService
                     ->limit(500, '...');
 
                 return sprintf(
-                    "%d. %s | %d/5 | %s",
+                    '%d. %s | %d/5 | %s',
                     $index + 1,
                     $author,
                     (int) $review['rating'],
@@ -128,10 +128,10 @@ class GitHubModelsReviewSummaryService
                 [
                     'role' => 'user',
                     'content' => "Learning resource:\n"
-                        . "Title: {$title}\n\n"
-                        . "Review count: {$reviews->count()}\n"
-                        . "Average rating: {$averageRating}/5\n\n"
-                        . "Reviews:\n{$reviewLines}",
+                        ."Title: {$title}\n\n"
+                        ."Review count: {$reviews->count()}\n"
+                        ."Average rating: {$averageRating}/5\n\n"
+                        ."Reviews:\n{$reviewLines}",
                 ],
             ],
             'temperature' => (float) config('services.github_models.temperature', 0.2),
@@ -226,12 +226,12 @@ class GitHubModelsReviewSummaryService
 
         $strengthKeywords = [
             'clear', 'easy', 'helpful', 'good', 'great', 'structured', 'organized',
-            'examples', 'simple', 'useful', 'beginner', 'detailed'
+            'examples', 'simple', 'useful', 'beginner', 'detailed',
         ];
 
         $weaknessKeywords = [
             'confusing', 'hard', 'boring', 'rushed', 'dense', 'slow', 'vague',
-            'unclear', 'bad', 'weak', 'difficult'
+            'unclear', 'bad', 'weak', 'difficult',
         ];
 
         $strengths = [];
@@ -260,11 +260,11 @@ class GitHubModelsReviewSummaryService
         $topWeaknesses = array_slice(array_keys($weaknesses), 0, 3);
 
         $strengthLine = count($topStrengths) > 0
-            ? 'Readers most often praise it for being ' . implode(', ', $topStrengths) . '.'
+            ? 'Readers most often praise it for being '.implode(', ', $topStrengths).'.'
             : 'Readers generally praise the overall usefulness of the resource.';
 
         $weaknessLine = count($topWeaknesses) > 0
-            ? 'Common complaints mention it can feel ' . implode(', ', $topWeaknesses) . '.'
+            ? 'Common complaints mention it can feel '.implode(', ', $topWeaknesses).'.'
             : 'There are fewer repeated complaints, but some readers still had mixed experiences.';
 
         $bestFor = match (true) {
@@ -274,34 +274,34 @@ class GitHubModelsReviewSummaryService
         };
 
         return "Overall sentiment: {$sentiment}\n\n"
-            . "\"{$title}\" currently has {$count} displayed review(s) with an average rating of {$averageRating}/5. "
-            . ($positiveCount >= $negativeCount
+            ."\"{$title}\" currently has {$count} displayed review(s) with an average rating of {$averageRating}/5. "
+            .($positiveCount >= $negativeCount
                 ? 'Most readers lean positive overall.'
                 : 'Reader opinion is more mixed or negative overall.')
-            . "\n\n"
-            . $strengthLine . "\n\n"
-            . $weaknessLine . "\n\n"
-            . $bestFor;
+            ."\n\n"
+            .$strengthLine."\n\n"
+            .$weaknessLine."\n\n"
+            .$bestFor;
     }
 
     public function formatSummaryText(array $summary): string
     {
         $strengths = collect($summary['strengths'] ?? [])
             ->filter()
-            ->map(fn (string $item) => '• ' . $item)
+            ->map(fn (string $item) => '• '.$item)
             ->implode("\n");
 
         $weaknesses = collect($summary['weaknesses'] ?? [])
             ->filter()
-            ->map(fn (string $item) => '• ' . $item)
+            ->map(fn (string $item) => '• '.$item)
             ->implode("\n");
 
         return trim(implode("\n\n", array_filter([
-            'Overall sentiment: ' . str((string) ($summary['overall_sentiment'] ?? 'mixed'))->replace('_', ' ')->title(),
+            'Overall sentiment: '.str((string) ($summary['overall_sentiment'] ?? 'mixed'))->replace('_', ' ')->title(),
             $summary['summary'] ?? null,
-            isset($summary['best_for']) ? 'Best for: ' . $summary['best_for'] : null,
+            isset($summary['best_for']) ? 'Best for: '.$summary['best_for'] : null,
             $strengths !== '' ? "Strengths:\n{$strengths}" : null,
             $weaknesses !== '' ? "Weaknesses:\n{$weaknesses}" : null,
         ])));
     }
-} 
+}
