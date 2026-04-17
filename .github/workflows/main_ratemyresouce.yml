@@ -21,7 +21,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.5'
+          php-version: '8.3'
 
       - name: Check if composer.json exists
         id: check_files
@@ -33,20 +33,6 @@ jobs:
         if: steps.check_files.outputs.files_exists == 'true'
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 9
-
-      - name: Build Frontend Assets
-        run: |
-          pnpm install
-          pnpm run build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -66,10 +52,19 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: php-app
-
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_88AD4D39051A45CDB0DF852DB5442FE1 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_55F13F90E90C4CD2A589F4B43160285C }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_CB3D7E72941240
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_8665BAD9558642068695723006CAB7AC }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_492DC79878A34BD5B24D09A9847697EF }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6585CBF59C764831AAF8A72017DD84FD }}
+
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v3
+        id: deploy-to-webapp
+        with:
+          app-name: 'RateMyResouce'
+          slot-name: 'Production'
+          package: .
+          
